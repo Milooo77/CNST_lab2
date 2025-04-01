@@ -1,0 +1,93 @@
+services:
+  cart:
+    build:
+      context: .
+      dockerfile: app/cart/Dockerfile
+    networks:
+      - gomall
+    environment:
+      - MYSQL_USER=root
+      - MYSQL_PASSWORD=root
+      - MYSQL_HOST=gomall-mysql
+    volumes:
+      - ./conf/cart.yaml:/app/conf/dev/conf.yaml
+  checkout:
+    build:
+      context: .
+      dockerfile: app/checkout/Dockerfile
+    networks:
+      - gomall
+    volumes:
+      - ./conf/checkout.yaml:/app/conf/dev/conf.yaml
+  email:
+    build:
+      context: .
+      dockerfile: app/email/Dockerfile
+    networks:
+      - gomall
+    volumes:
+      - ./conf/email.yaml:/app/conf/dev/conf.yaml
+  frontend:
+    build:
+      context: .
+      dockerfile: app/frontend/Dockerfile
+    ports:
+      - "8080:8080"
+    networks:
+      - gomall
+    volumes:
+      - ./conf/frontend.yaml:/app/conf/dev/conf.yaml
+    environment:
+      - SESSION_SECRET=secret
+  order:
+    build:
+      context: .
+      dockerfile: app/order/Dockerfile
+    networks:
+      - gomall
+    environment:
+      - MYSQL_USER=root
+      - MYSQL_PASSWORD=root
+      - MYSQL_HOST=gomall-mysql
+    volumes:
+      - ./conf/order.yaml:/app/conf/dev/conf.yaml
+  payment:
+    build:
+      context: .
+      dockerfile: app/payment/Dockerfile
+    networks:
+      - gomall
+    environment:
+      - MYSQL_USER=root
+      - MYSQL_PASSWORD=root
+      - MYSQL_HOST=gomall-mysql
+    volumes:
+      - ./conf/payment.yaml:/app/conf/dev/conf.yaml
+  product:
+    build:
+      context: .
+      dockerfile: app/product/Dockerfile
+    networks:
+      - gomall
+    environment:
+      - MYSQL_USER=root
+      - MYSQL_PASSWORD=root
+      - MYSQL_HOST=gomall-mysql
+    volumes:  
+      - ./conf/product.yaml:/app/conf/dev/conf.yaml
+  user:
+    build:
+      context: .
+      dockerfile: app/user/Dockerfile
+    networks:
+      - gomall
+    environment:
+      - MYSQL_USER=root
+      - MYSQL_PASSWORD=root
+      - MYSQL_HOST=gomall-mysql
+    volumes:
+      - ./conf/user.yaml:/app/conf/dev/conf.yaml
+
+networks:
+  gomall:
+    external: true

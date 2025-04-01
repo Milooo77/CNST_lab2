@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
-set -x  # 开启调试模式
+RUN_NAME="checkout"
 mkdir -p output/bin output/conf
-cp -v script/* output/  # -v 显示复制的文件
-cp -vr conf/* output/conf
+cp script/* output/
+cp -r conf/* output/conf
 chmod +x output/bootstrap.sh
-go build -o output/bin/checkout
+go build -o output/bin/${RUN_NAME}

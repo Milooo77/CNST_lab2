@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 RUN_NAME="cart"
-mkdir -p output/bin
-mkdir -p output/conf
+mkdir -p output/bin output/conf
 cp script/* output/
 cp -r conf/* output/conf
 chmod +x output/bootstrap.sh
